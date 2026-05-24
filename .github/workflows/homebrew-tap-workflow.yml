@@ -24,3 +24,5 @@ jobs:
           git add Formula/ocular.rb
           git commit -m "Update ocular to ${{ github.event.client_payload.version }}"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
