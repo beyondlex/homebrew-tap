@@ -1,0 +1,26 @@
+name: Update Formula
+
+on:
+  repository_dispatch:
+    types: [update-formula]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Formula
+        run: |
+          VERSION="${{ github.event.client_payload.version }}"
+          VERSION="${VERSION#v}"
+          sed -i "s/version \".*\"/version \"$VERSION\"/" Formula/ocular.rb
+          sed -i "0,/sha256 \".*\"/{s/sha256 \".*\"/sha256 \"${{ github.event.client_payload.sha256_macos_arm64 }}\"/}" Formula/ocular.rb
+          sed -i "0,/sha256 \".*\"/{s/sha256 \".*\"/sha256 \"${{ github.event.client_payload.sha256_macos_amd64 }}\"/}" Formula/ocular.rb
+          sed -i "0,/sha256 \".*\"/{s/sha256 \".*\"/sha256 \"${{ github.event.client_payload.sha256_linux_amd64 }}\"/}" Formula/ocular.rb
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Formula/ocular.rb
+          git commit -m "Update ocular to ${{ github.event.client_payload.version }}"
+          git push
