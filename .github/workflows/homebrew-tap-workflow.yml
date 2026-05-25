@@ -16,9 +16,15 @@ jobs:
           VERSION="${{ github.event.client_payload.version }}"
           VERSION="${VERSION#v}"
           sed -i "s/version \".*\"/version \"$VERSION\"/" Formula/ocular.rb
-          sed -i "0,/sha256 \".*\"/{s/sha256 \".*\"/sha256 \"${{ github.event.client_payload.sha256_macos_arm64 }}\"/}" Formula/ocular.rb
-          sed -i "0,/sha256 \".*\"/{s/sha256 \".*\"/sha256 \"${{ github.event.client_payload.sha256_macos_amd64 }}\"/}" Formula/ocular.rb
-          sed -i "0,/sha256 \".*\"/{s/sha256 \".*\"/sha256 \"${{ github.event.client_payload.sha256_linux_amd64 }}\"/}" Formula/ocular.rb
+          # Update the sha256 checksum for macOS ARM64 by locating the ocular-macos-arm64 URL line
+          sed -i "/ocular-macos-arm64/,/sha256/ s/sha256 \".*\"/sha256 \"${{ github.event.client_payload.sha256_macos_arm64 }}\"/" Formula/ocular.rb
+
+          # Update the sha256 checksum for macOS AMD64 (Intel) by locating the ocular-macos-amd64 URL line
+          sed -i "/ocular-macos-amd64/,/sha256/ s/sha256 \".*\"/sha256 \"${{ github.event.client_payload.sha256_macos_amd64 }}\"/" Formula/ocular.rb
+
+          # Update the sha256 checksum for Linux AMD64 by locating the ocular-linux-amd64 URL line
+          sed -i "/ocular-linux-amd64/,/sha256/ s/sha256 \".*\"/sha256 \"${{ github.event.client_payload.sha256_linux_amd64 }}\"/" Formula/ocular.rb
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
