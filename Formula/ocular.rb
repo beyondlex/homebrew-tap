@@ -18,7 +18,7 @@ class Ocular < Formula
   on_linux do
     on_intel do
       url "https://github.com/beyondlex/ocular/releases/download/v#{version}/ocular-linux-amd64"
-      sha256 "40c0d7cfce04fee7f8e51ce10d68b17fe7fcf68116d4465ca0fea9537fabced1"
+      sha256 "ef93e2feedc14127dca3877aec9b6eb7f9b4d2bbc1aa491d7ce58ce476b4a509"
     end
   end
 
