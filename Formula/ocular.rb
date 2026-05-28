@@ -1,24 +1,24 @@
 class Ocular < Formula
   desc "TUI tool for real-time visualization of middleware traffic"
   homepage "https://github.com/beyondlex/ocular"
-  version "0.12.0"
+  version "0.13.0"
   license "MIT"
 
   on_macos do
     on_arm do
       url "https://github.com/beyondlex/ocular/releases/download/v#{version}/ocular-macos-arm64"
-      sha256 "ff1c87e1b16c273ccf2ab5409b93dd883a27e353210dd36028f026cea8bb9f82"
+      sha256 "70b86eb6e27949dd7cef466e8d88745dc010eae6e96f560bd0177d27ae27fa71"
     end
     on_intel do
       url "https://github.com/beyondlex/ocular/releases/download/v#{version}/ocular-macos-amd64"
-      sha256 "3770955cc1e2394824042e8283eca3e1ca9ede4490662a6e08f6a8e4e68d6b5b"
+      sha256 "f51292f20eda84eb4758c7fee0cbd50ac93bf4a75a8604d13a141ee2497a4e3a"
     end
   end
 
   on_linux do
     on_intel do
       url "https://github.com/beyondlex/ocular/releases/download/v#{version}/ocular-linux-amd64"
-      sha256 "099d7d91630f5b2694b2a342b19f0fb8741602887607ea4b60ff1cd1b56ef014"
+      sha256 "79162d727620eac681b5b28fcecd12157da6066f2c24a8411af4d9a288db629e"
     end
   end
 
